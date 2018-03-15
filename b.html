@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <head>
+        <title></title>
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+        <style>
+            .Tips {
+                display: none;
+                padding: 5px;
+                position: absolute;
+                background: #aaa;
+                color: #fff;
+                border: 1px solid #555;
+            }
+        </style>
+    </head>
+
+    <body style="height:500px;">
+    </body>
+    <script type="text/javascript">
+        window.Alert = function(messages, callback) {
+            if ($(".Tips").length < 1) {
+                $("body").append("<div class=\"Tips\">" + messages + "</div>");
+            };
+            //定位居中显示
+            leftW = ($(window).width() - $(".Tips").width()) / 2;
+            topH = ($(window).height() - $(".Tips").height()) / 2;
+            $(".Tips").css("top", topH + "px").css("left", leftW + "px").fadeIn(1000);
+            //弹出效果并执行回调
+            $(".Tips").animate({
+                top: "0px",
+                opacity: 0.5
+            }, 2000, function() {
+                $(".Tips").remove();
+                if (callback != undefined)
+                    callback();
+            })
+        };
+        Alert("你好", function() {
+            alert("回调函数")
+        });
+        //菜单按钮动态显示隐藏
+        // $contentright.hover(
+        //     function() {
+        //         let $this = $(this);
+        //         console.log('进入设置区域');
+        //         $this.stop().animate({ width: '90px' }, 1000).find('button').stop(true, true).fadeIn(800);
+        //     },
+        //     function() {
+        //         let $this = $(this);
+        //         $this.stop().animate({ width: '40px' }, 1000).find('button').stop(true, true).fadeOut(800);
+        //     }
+        // );
+    </script>
+</body>
+
+</html>
